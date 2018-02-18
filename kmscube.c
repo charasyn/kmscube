@@ -60,7 +60,7 @@ static void usage(const char *name)
 			"    -A, --atomic             use atomic modesetting and fencing\n"
 			"    -D, --device=DEVICE      use the given device\n"
 			"    -m, --modifier=MODIFIER  hardcode the selected modifier\n"
-			name);
+			, name);
 }
 
 int main(int argc, char *argv[])
