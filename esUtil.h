@@ -42,7 +42,7 @@
 ///
 //  Includes
 //
-#include <GLES2/gl2.h>
+#include <GLES/gl.h>
 #include <EGL/egl.h>
 
 #ifdef __cplusplus
