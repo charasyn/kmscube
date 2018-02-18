@@ -207,10 +207,10 @@ static void draw_cube_smooth(unsigned i)
 	//normal[8] = modelview.m[2][2];
 
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrix(modelview.m);
+	glLoadMatrixf(modelview.m);
 
 	glMatrixMode(GL_PROJECTION);
-	glLoadMatrix(projection.m);
+	glLoadMatrixf(projection.m);
 
 	//glUniformMatrix4fv(gl.modelviewmatrix, 1, GL_FALSE, &modelview.m[0][0]);
 	//glUniformMatrix4fv(gl.modelviewprojectionmatrix, 1, GL_FALSE, &modelviewprojection.m[0][0]);
