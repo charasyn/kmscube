@@ -137,12 +137,13 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	if (mode == SMOOTH)
-		egl = init_cube_smooth(gbm);
-	else if (mode == VIDEO)
-		egl = init_cube_video(gbm, video);
-	else
-		egl = init_cube_tex(gbm, mode);
+	//if (mode == SMOOTH)
+	//	egl = init_cube_smooth(gbm);
+	//else if (mode == VIDEO)
+	//	egl = init_cube_video(gbm, video);
+	//else
+	//	egl = init_cube_tex(gbm, mode);
+	egl = init_cube_smooth(gbm);
 
 	if (!egl) {
 		printf("failed to initialize EGL\n");

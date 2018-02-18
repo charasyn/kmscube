@@ -169,7 +169,7 @@ int init_egl(struct egl *egl, const struct gbm *gbm)
 
 	return 0;
 }
-
+/*
 int create_program(const char *vs_src, const char *fs_src)
 {
 	GLuint vertex_shader, fragment_shader, program;
@@ -248,3 +248,4 @@ int link_program(unsigned program)
 
 	return 0;
 }
+*/

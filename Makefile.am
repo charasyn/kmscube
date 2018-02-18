@@ -27,7 +27,7 @@ kmscube_LDADD = \
 	$(DRM_LIBS) \
 	$(GBM_LIBS) \
 	$(EGL_LIBS) \
-	$(GLES2_LIBS) \
+	$(GLES_LIBS) \
 	-lm
 
 kmscube_CFLAGS = \
@@ -37,7 +37,7 @@ kmscube_CFLAGS = \
 	$(DRM_CFLAGS) \
 	$(GBM_CFLAGS) \
 	$(EGL_CFLAGS) \
-	$(GLES2_CFLAGS)
+	$(GLES_CFLAGS)
 
 kmscube_SOURCES = \
 	common.c \
