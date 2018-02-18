@@ -32,11 +32,6 @@ struct {
 	struct egl egl;
 
 	GLfloat aspect;
-
-	GLuint program;
-	GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;
-	GLuint vbo;
-	GLuint positionsoffset, colorsoffset, normalsoffset;
 } gl;
 
 static const GLfloat vVertices[] = {
@@ -138,41 +133,6 @@ static const GLfloat vNormals[] = {
 		+0.0f, -1.0f, +0.0f  // down
 };
 
-//static const char *vertex_shader_source =
-//		"uniform mat4 modelviewMatrix;      \n"
-//		"uniform mat4 modelviewprojectionMatrix;\n"
-//		"uniform mat3 normalMatrix;         \n"
-//		"                                   \n"
-//		"attribute vec4 in_position;        \n"
-//		"attribute vec3 in_normal;          \n"
-//		"attribute vec4 in_color;           \n"
-//		"\n"
-//		"vec4 lightSource = vec4(2.0, 2.0, 20.0, 0.0);\n"
-//		"                                   \n"
-//		"varying vec4 vVaryingColor;        \n"
-//		"                                   \n"
-//		"void main()                        \n"
-//		"{                                  \n"
-//		"    gl_Position = modelviewprojectionMatrix * in_position;\n"
-//		"    vec3 vEyeNormal = normalMatrix * in_normal;\n"
-//		"    vec4 vPosition4 = modelviewMatrix * in_position;\n"
-//		"    vec3 vPosition3 = vPosition4.xyz / vPosition4.w;\n"
-//		"    vec3 vLightDir = normalize(lightSource.xyz - vPosition3);\n"
-//		"    float diff = max(0.0, dot(vEyeNormal, vLightDir));\n"
-//		"    vVaryingColor = vec4(diff * in_color.rgb, 1.0);\n"
-//		"}                                  \n";
-//
-//static const char *fragment_shader_source =
-//		"precision mediump float;           \n"
-//		"                                   \n"
-//		"varying vec4 vVaryingColor;        \n"
-//		"                                   \n"
-//		"void main()                        \n"
-//		"{                                  \n"
-//		"    gl_FragColor = vVaryingColor;  \n"
-//		"}                                  \n";
-
-
 static void draw_cube_smooth(unsigned i)
 {
 	ESMatrix modelview;
@@ -191,30 +151,11 @@ static void draw_cube_smooth(unsigned i)
 	esMatrixLoadIdentity(&projection);
 	esFrustum(&projection, -2.8f, +2.8f, -2.8f * gl.aspect, +2.8f * gl.aspect, 6.0f, 10.0f);
 
-	//ESMatrix modelviewprojection;
-	//esMatrixLoadIdentity(&modelviewprojection);
-	//esMatrixMultiply(&modelviewprojection, &modelview, &projection);
-
-	//float normal[9];
-	//normal[0] = modelview.m[0][0];
-	//normal[1] = modelview.m[0][1];
-	//normal[2] = modelview.m[0][2];
-	//normal[3] = modelview.m[1][0];
-	//normal[4] = modelview.m[1][1];
-	//normal[5] = modelview.m[1][2];
-	//normal[6] = modelview.m[2][0];
-	//normal[7] = modelview.m[2][1];
-	//normal[8] = modelview.m[2][2];
-
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(modelview.m);
+	glLoadMatrixf((GLfloat *)modelview.m);
 
 	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(projection.m);
-
-	//glUniformMatrix4fv(gl.modelviewmatrix, 1, GL_FALSE, &modelview.m[0][0]);
-	//glUniformMatrix4fv(gl.modelviewprojectionmatrix, 1, GL_FALSE, &modelviewprojection.m[0][0]);
-	//glUniformMatrix3fv(gl.normalmatrix, 1, GL_FALSE, normal);
+	glLoadMatrixf((GLfloat *)projection.m);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glDrawArrays(GL_TRIANGLE_STRIP, 4, 4);
@@ -234,42 +175,9 @@ const struct egl * init_cube_smooth(const struct gbm *gbm)
 
 	gl.aspect = (GLfloat)(gbm->height) / (GLfloat)(gbm->width);
 
-	//ret = create_program(vertex_shader_source, fragment_shader_source);
-	//if (ret < 0)
-	//	return NULL;
-
-	//gl.program = ret;
-
-	//glBindAttribLocation(gl.program, 0, "in_position");
-	//glBindAttribLocation(gl.program, 1, "in_normal");
-	//glBindAttribLocation(gl.program, 2, "in_color");
-
-	//ret = link_program(gl.program);
-	//if (ret)
-	//	return NULL;
-
-	//glUseProgram(gl.program);
-
-	//gl.modelviewmatrix = glGetUniformLocation(gl.program, "modelviewMatrix");
-	//gl.modelviewprojectionmatrix = glGetUniformLocation(gl.program, "modelviewprojectionMatrix");
-	//gl.normalmatrix = glGetUniformLocation(gl.program, "normalMatrix");
-
 	glViewport(0, 0, gbm->width, gbm->height);
 	glEnable(GL_CULL_FACE);
 
-	gl.positionsoffset = 0;
-	gl.colorsoffset = sizeof(vVertices);
-	gl.normalsoffset = sizeof(vVertices) + sizeof(vColors);
-	//glGenBuffers(1, &gl.vbo);
-	//glBindBuffer(GL_ARRAY_BUFFER, gl.vbo);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(vVertices), 0, GL_STATIC_DRAW);
-	//glBufferSubData(GL_ARRAY_BUFFER, gl.positionsoffset, sizeof(vVertices), &vVertices[0]);
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid *)(intptr_t)gl.positionsoffset);
-	//glEnableVertexAttribArray(0);
-	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid *)(intptr_t)gl.normalsoffset);
-	//glEnableVertexAttribArray(1);
-	//glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid *)(intptr_t)gl.colorsoffset);
-	//glEnableVertexAttribArray(2);
 	glVertexPointer(3, GL_FLOAT, 0, vVertices);
 	glColorPointer(4, GL_FLOAT, 0, vColors);
 	glEnableClientState(GL_VERTEX_ARRAY);

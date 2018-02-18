@@ -40,15 +40,6 @@ PKG_CHECK_MODULES(GBM, gbm >= 13.0)
 PKG_CHECK_MODULES(EGL, egl)
 PKG_CHECK_MODULES(GLES, glesv1_cm)
 
-# Check for gst and enable cube-video conditionally:
-PKG_CHECK_MODULES(GST, gstreamer-1.0 >= 1.6.0 gstreamer-plugins-base-1.0 >= 1.6.0 gstreamer-app-1.0 >= 1.6.0 gstreamer-allocators-1.0 >= 1.6.0 gstreamer-video-1.0 >= 1.6.0 glib-2.0,
-		 [HAVE_GST=yes], [HAVE_GST=no])
-if test "x$HAVE_GST" = "xyes"; then
-	AC_DEFINE(HAVE_GST, 1, [Have GStreamer support])
-	AC_MSG_NOTICE([Building cube-video support])
-fi
-AM_CONDITIONAL(ENABLE_GST, [test "x$HAVE_GST" = "xyes"])
-
 AC_CHECK_LIB([gbm], [gbm_bo_get_modifier], [gbm_modifiers=yes], [])
 
 AC_ARG_ENABLE([gbm-modifiers],

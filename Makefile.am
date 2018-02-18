@@ -50,15 +50,3 @@ kmscube_SOURCES = \
 	esTransform.c \
 	esUtil.h \
 	kmscube.c
-
-# removed from above:
-#	cube-tex.c \
-#	frame-512x512-NV12.c \
-#	frame-512x512-RGBA.c \
-# 
-
-if ENABLE_GST
-kmscube_LDADD += $(GST_LIBS)
-kmscube_CFLAGS += $(GST_CFLAGS)
-kmscube_SOURCES += cube-video.c gst-decoder.c
-endif
