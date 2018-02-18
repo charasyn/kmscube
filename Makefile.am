@@ -55,6 +55,7 @@ kmscube_SOURCES = \
 #	cube-tex.c \
 #	frame-512x512-NV12.c \
 #	frame-512x512-RGBA.c \
+# 
 
 if ENABLE_GST
 kmscube_LDADD += $(GST_LIBS)
