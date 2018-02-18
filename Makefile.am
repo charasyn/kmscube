@@ -43,16 +43,18 @@ kmscube_SOURCES = \
 	common.c \
 	common.h \
 	cube-smooth.c \
-	cube-tex.c \
 	drm-atomic.c \
 	drm-common.c \
 	drm-common.h \
 	drm-legacy.c \
 	esTransform.c \
 	esUtil.h \
-	frame-512x512-NV12.c \
-	frame-512x512-RGBA.c \
 	kmscube.c
+
+# removed from above:
+#	cube-tex.c \
+#	frame-512x512-NV12.c \
+#	frame-512x512-RGBA.c \
 
 if ENABLE_GST
 kmscube_LDADD += $(GST_LIBS)
