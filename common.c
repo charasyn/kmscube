@@ -161,7 +161,7 @@ int init_egl(struct egl *egl, const struct gbm *gbm)
 
 	printf("Context information:\n");
 	printf("  version: \"%s\"\n", glGetString(GL_VERSION));
-	printf("  shading language version: \"%s\"\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+	//printf("  shading language version: \"%s\"\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 	printf("  vendor: \"%s\"\n", glGetString(GL_VENDOR));
 	printf("  renderer: \"%s\"\n", glGetString(GL_RENDERER));
 	printf("  extensions: \"%s\"\n", glGetString(GL_EXTENSIONS));
