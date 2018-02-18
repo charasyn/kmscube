@@ -206,9 +206,9 @@ static void draw_cube_smooth(unsigned i)
 	normal[7] = modelview.m[2][1];
 	normal[8] = modelview.m[2][2];
 
-	glUniformMatrix4fv(gl.modelviewmatrix, 1, GL_FALSE, &modelview.m[0][0]);
-	glUniformMatrix4fv(gl.modelviewprojectionmatrix, 1, GL_FALSE, &modelviewprojection.m[0][0]);
-	glUniformMatrix3fv(gl.normalmatrix, 1, GL_FALSE, normal);
+	//glUniformMatrix4fv(gl.modelviewmatrix, 1, GL_FALSE, &modelview.m[0][0]);
+	//glUniformMatrix4fv(gl.modelviewprojectionmatrix, 1, GL_FALSE, &modelviewprojection.m[0][0]);
+	//glUniformMatrix3fv(gl.normalmatrix, 1, GL_FALSE, normal);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glDrawArrays(GL_TRIANGLE_STRIP, 4, 4);
@@ -228,25 +228,25 @@ const struct egl * init_cube_smooth(const struct gbm *gbm)
 
 	gl.aspect = (GLfloat)(gbm->height) / (GLfloat)(gbm->width);
 
-	ret = create_program(vertex_shader_source, fragment_shader_source);
-	if (ret < 0)
-		return NULL;
+	//ret = create_program(vertex_shader_source, fragment_shader_source);
+	//if (ret < 0)
+	//	return NULL;
 
-	gl.program = ret;
+	//gl.program = ret;
 
-	glBindAttribLocation(gl.program, 0, "in_position");
-	glBindAttribLocation(gl.program, 1, "in_normal");
-	glBindAttribLocation(gl.program, 2, "in_color");
+	//glBindAttribLocation(gl.program, 0, "in_position");
+	//glBindAttribLocation(gl.program, 1, "in_normal");
+	//glBindAttribLocation(gl.program, 2, "in_color");
 
-	ret = link_program(gl.program);
-	if (ret)
-		return NULL;
+	//ret = link_program(gl.program);
+	//if (ret)
+	//	return NULL;
 
-	glUseProgram(gl.program);
+	//glUseProgram(gl.program);
 
-	gl.modelviewmatrix = glGetUniformLocation(gl.program, "modelviewMatrix");
-	gl.modelviewprojectionmatrix = glGetUniformLocation(gl.program, "modelviewprojectionMatrix");
-	gl.normalmatrix = glGetUniformLocation(gl.program, "normalMatrix");
+	//gl.modelviewmatrix = glGetUniformLocation(gl.program, "modelviewMatrix");
+	//gl.modelviewprojectionmatrix = glGetUniformLocation(gl.program, "modelviewprojectionMatrix");
+	//gl.normalmatrix = glGetUniformLocation(gl.program, "normalMatrix");
 
 	glViewport(0, 0, gbm->width, gbm->height);
 	glEnable(GL_CULL_FACE);
@@ -260,12 +260,12 @@ const struct egl * init_cube_smooth(const struct gbm *gbm)
 	glBufferSubData(GL_ARRAY_BUFFER, gl.positionsoffset, sizeof(vVertices), &vVertices[0]);
 	glBufferSubData(GL_ARRAY_BUFFER, gl.colorsoffset, sizeof(vColors), &vColors[0]);
 	glBufferSubData(GL_ARRAY_BUFFER, gl.normalsoffset, sizeof(vNormals), &vNormals[0]);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid *)(intptr_t)gl.positionsoffset);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid *)(intptr_t)gl.normalsoffset);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid *)(intptr_t)gl.colorsoffset);
-	glEnableVertexAttribArray(2);
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid *)(intptr_t)gl.positionsoffset);
+	//glEnableVertexAttribArray(0);
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid *)(intptr_t)gl.normalsoffset);
+	//glEnableVertexAttribArray(1);
+	//glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid *)(intptr_t)gl.colorsoffset);
+	//glEnableVertexAttribArray(2);
 
 	gl.egl.draw = draw_cube_smooth;
 

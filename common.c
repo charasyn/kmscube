@@ -83,7 +83,7 @@ int init_egl(struct egl *egl, const struct gbm *gbm)
 	EGLint major, minor, n;
 
 	static const EGLint context_attribs[] = {
-		EGL_CONTEXT_CLIENT_VERSION, 2,
+		EGL_CONTEXT_CLIENT_VERSION, 1,
 		EGL_NONE
 	};
 
@@ -93,7 +93,7 @@ int init_egl(struct egl *egl, const struct gbm *gbm)
 		EGL_GREEN_SIZE, 1,
 		EGL_BLUE_SIZE, 1,
 		EGL_ALPHA_SIZE, 0,
-		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES_BIT,
 		EGL_NONE
 	};
 
@@ -159,7 +159,7 @@ int init_egl(struct egl *egl, const struct gbm *gbm)
 	/* connect the context to the surface */
 	eglMakeCurrent(egl->display, egl->surface, egl->surface, egl->context);
 
-	printf("OpenGL ES 2.x information:\n");
+	printf("Context information:\n");
 	printf("  version: \"%s\"\n", glGetString(GL_VERSION));
 	printf("  shading language version: \"%s\"\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 	printf("  vendor: \"%s\"\n", glGetString(GL_VENDOR));
